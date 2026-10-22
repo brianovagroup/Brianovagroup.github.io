@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>MYOZONO</title>
+<script>
+(function(){
+  var p = window.location.pathname;
+  var shop = /^\/(products|collections|pages|cart|account|checkout|policies|blogs|search)(\/|$)/.test(p);
+  if (shop) {
+    window.location.replace('https://tienda.myozono.com' + p + window.location.search);
+  } else {
+    window.location.replace('/');
+  }
+})();
+</script>
+</head>
+<body>
+<p>Redirigiendo… <a href="/">Ir a MYOZONO</a></p>
+</body>
+</html>
