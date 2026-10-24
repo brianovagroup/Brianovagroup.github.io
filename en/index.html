@@ -874,5 +874,24 @@
       });
     }());
   </script>
-<a href="/" aria-label="Ver esta página en español" style="position:fixed;right:14px;bottom:14px;z-index:59;background:#0F2036;color:#FAF7F0;border:1px solid #C9A24B;border-radius:999px;padding:9px 15px;font:600 13px/1 system-ui,sans-serif;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.25)">&#127760; ES</a></body>
+<a href="/" aria-label="Ver esta página en español" style="position:fixed;right:14px;bottom:14px;z-index:59;background:#0F2036;color:#FAF7F0;border:1px solid #C9A24B;border-radius:999px;padding:9px 15px;font:600 13px/1 system-ui,sans-serif;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.25)">&#127760; ES</a>  <script>
+    /* Volver: al ir a la tienda, recuerda en qué sección estaba el visitante */
+    document.addEventListener('click',function(e){
+      var a=e.target.closest&&e.target.closest('a[href*="tienda.myozono.com"]');
+      if(!a)return;
+      try{
+        var u=new URL(a.href);
+        if(u.searchParams.has('volver'))return;
+        var sec=a.closest('section[id]');
+        var id=sec?sec.id:null;
+        if(!id){
+          var mid=window.innerHeight/2,found=null;
+          document.querySelectorAll('section[id]').forEach(function(s){var r=s.getBoundingClientRect();if(r.top<=mid&&r.bottom>=mid)found=s.id});
+          id=found;
+        }
+        if(id){u.searchParams.set('volver',id);a.href=u.toString();}
+      }catch(err){}
+    });
+  </script>
+</body>
 </html>
