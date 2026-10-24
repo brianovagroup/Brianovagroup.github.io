@@ -803,8 +803,10 @@
       /* Gate */
       var gate=document.getElementById('research-gate'),age=document.getElementById('age-check'),researcher=document.getElementById('researcher-check'),enter=document.getElementById('gate-enter');
       function updateGate(){enter.disabled=!(age.checked&&researcher.checked)}
+      function dismissGate(){gate.hidden=true;document.body.classList.remove('gate-locked');try{localStorage.setItem('myozono_gate','1')}catch(e){}var h=location.hash;if(h){var t=document.querySelector(h);if(t)t.scrollIntoView()}}
       age.addEventListener('change',updateGate);researcher.addEventListener('change',updateGate);
-      enter.addEventListener('click',function(){if(enter.disabled)return;gate.hidden=true;document.body.classList.remove('gate-locked');document.getElementById('menu-toggle').focus()});age.focus();
+      try{if(localStorage.getItem('myozono_gate')==='1'){dismissGate()}else{age.focus()}}catch(e){age.focus()}
+      enter.addEventListener('click',function(){if(enter.disabled)return;dismissGate();document.getElementById('menu-toggle').focus()});
 
       /* Mobile menu */
       var menu=document.getElementById('menu-toggle'),nav=document.querySelector('.nav');
